@@ -11,15 +11,13 @@ import java.util.List;
 public class Tpa {
     private static final List<Tpa> Tpas = new ArrayList<>();
 
-    private final Player requestingPlayer;
-    private final Player requestedPlayer;
-    private final TpaMode mode;
+    private final Player teleportingPlayer;
+    private final Player targetPlayer;
 
     // Called when a tpa has been started
-    public Tpa(Player requestingPlayer, Player requestedPlayer, TpaMode mode) {
-        this.requestingPlayer = requestingPlayer;
-        this.requestedPlayer = requestedPlayer;
-        this.mode = mode;
+    public Tpa(Player teleportingPlayer, Player targetPlayer) {
+        this.teleportingPlayer = teleportingPlayer;
+        this.targetPlayer = targetPlayer;
 
         // Add tpa to list
         getTpas().add(this);
@@ -27,7 +25,7 @@ public class Tpa {
         // Expire tpa after time is up
         Bukkit.getScheduler().runTaskLater(
                 Main.getInstance(), this::tpaExpired,
-                Main.getInstance().getManager().getConfigUtils().getKeepAliveSeconds()
+                Main.getInstance().getManager().getConfigUtils().getKeepAliveSeconds() * 20L
         );
     }
 
@@ -37,11 +35,8 @@ public class Tpa {
     public static Tpa getTpa(final Player teleportingPlayer, final Player targetPlayer) {
         // Loop through tpas
         for (Tpa tpa : getTpas()) {
-            // Get players and check TpaMode
-            Player checkTeleportingPlayer = (tpa.mode == TpaMode.TPA) ? tpa.requestingPlayer : tpa.requestedPlayer;
-            Player checkTargetPlayer = (tpa.mode == TpaMode.TPA) ? tpa.requestedPlayer : tpa.requestingPlayer;
-            // Check if tpa exists
-            if (teleportingPlayer.getUniqueId() == checkTeleportingPlayer.getUniqueId() && targetPlayer.getUniqueId() == checkTargetPlayer.getUniqueId()) {
+            if (tpa.teleportingPlayer.getUniqueId() == teleportingPlayer.getUniqueId() &&
+                    tpa.targetPlayer.getUniqueId() == targetPlayer.getUniqueId()) {
                 return tpa;
             }
         }
@@ -55,8 +50,12 @@ public class Tpa {
 
         // Assign variables and check TpaMode
         final int preTeleportSeconds = Main.getInstance().getManager().getConfigUtils().getPreTeleportSeconds();
-        final Player teleportingPlayer = (mode == TpaMode.TPA) ? requestingPlayer : requestedPlayer;
-        final Player targetPlayer = (mode == TpaMode.TPA) ? requestedPlayer : requestingPlayer;
+
+        // Check if players are still online
+        if (!teleportingPlayer.isOnline() || !targetPlayer.isOnline()) {
+            getTpas().remove(this);
+            return;
+        }
 
         // Send messages
         Main.getInstance().getManager().getShortMessages().sendSuccessMessage(teleportingPlayer,
@@ -68,13 +67,12 @@ public class Tpa {
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             // Check if players are still online
             if (!teleportingPlayer.isOnline() || !targetPlayer.isOnline()) {
-                System.out.println("At least 1 player is offline");
                 getTpas().remove(this);
                 return;
             }
             // Teleport player via LocationUtils to also play sound for all near players
             Main.getInstance().getManager().getLocationUtils().teleportPlayer(teleportingPlayer, targetPlayer.getLocation());
-        }, preTeleportSeconds);
+        }, preTeleportSeconds * 20L);
     }
 
     // Called when the tpa expires
@@ -85,12 +83,17 @@ public class Tpa {
         // "Delete" tpa
         getTpas().remove(this);
 
-        // Send messages
-        Main.getInstance().getManager().getShortMessages().sendFailMessage(requestingPlayer,
-                String.format("Your request to§e %s§7 has been§c expired", requestedPlayer));
-        Main.getInstance().getManager().getShortMessages().sendFailMessage(requestedPlayer,
-                String.format("§e%s§7's request has been§c expired", requestingPlayer));
+        // Check if players are still online
+        if (!teleportingPlayer.isOnline() || !targetPlayer.isOnline()) {
+            getTpas().remove(this);
+            return;
+        }
 
+        // Send messages
+        Main.getInstance().getManager().getShortMessages().sendFailMessage(teleportingPlayer,
+                String.format("Your request to§e %s§7 has been§c expired", targetPlayer.getDisplayName()));
+        Main.getInstance().getManager().getShortMessages().sendFailMessage(targetPlayer,
+                String.format("§e%s§7's request has been§c expired", teleportingPlayer.getDisplayName()));
     }
 
     // Getter

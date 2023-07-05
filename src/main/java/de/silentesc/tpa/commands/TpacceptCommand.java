@@ -39,7 +39,7 @@ public class TpacceptCommand implements CommandExecutor {
         }
 
         // Check if tpa exists
-        Tpa tpa = Tpa.getTpa(player, target);
+        Tpa tpa = Tpa.getTpa(target, player);
         if (tpa == null) {
             manager.getShortMessages().sendFailMessage(player, "This tpa doesn't exist or is expired.");
             return true;

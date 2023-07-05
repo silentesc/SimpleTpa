@@ -3,7 +3,6 @@ package de.silentesc.tpa.commands;
 import de.silentesc.tpa.Main;
 import de.silentesc.tpa.Manager;
 import de.silentesc.tpa.classes.Tpa;
-import de.silentesc.tpa.classes.TpaMode;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -42,8 +41,14 @@ public class TpaCommand implements CommandExecutor {
             return true;
         }
 
+        // Check if target is player
+        if (player.getUniqueId() == target.getUniqueId()) {
+            manager.getShortMessages().sendFailMessage(player, "You can't send a request to yourself.");
+            return true;
+        }
+
         // Create tpa
-        new Tpa(player, target, TpaMode.TPA);
+        new Tpa(player, target);
 
         // Send messages
         manager.getShortMessages().sendSuccessMessage(player, String.format("A tpa request has been sent to§e %s", target.getDisplayName()));
