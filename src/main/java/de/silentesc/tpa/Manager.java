@@ -43,9 +43,9 @@ public class Manager {
     private void initialize() {
         prefix = "§7[§eTPA§7] ";
         shortMessages = new ShortMessages();
-        configUtils = new ConfigUtils(); // Init FileConfig: config.yaml
         javaUtils = new JavaUtils();
         locationUtils = new LocationUtils();
+        configUtils = new ConfigUtils(); // Init FileConfig: config.yaml
     }
 
     // Register Commands, TabCompleter and Listeners
