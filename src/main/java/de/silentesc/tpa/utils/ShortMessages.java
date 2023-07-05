@@ -11,12 +11,6 @@ public class ShortMessages {
     public void notAPlayer(CommandSender sender) {
         sender.sendMessage(manager.getPrefix() + "Only players can execute this command.");
     }
-    public void notPermitted(Player player) {
-        this.sendFailMessage(player, "You are not permitted to do this.");
-    }
-    public void notPermitted(CommandSender sender) {
-        this.sendMessageToSender(sender, "You are not permitted to do this.");
-    }
     public void sendSuccessMessage(Player player, String message) {
         player.sendMessage(manager.getPrefix() + message);
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
@@ -25,41 +19,8 @@ public class ShortMessages {
         player.sendMessage(manager.getPrefix() + "§c" + message);
         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
     }
-    public void sendMessageWithoutSound(Player player, String message) {
-        player.sendMessage(manager.getPrefix() + message);
-    }
-    public void sendRawMessage(Player player, String message) {
-        player.sendMessage(message);
-    }
     public void wrongUsage(Player player, String[] usages) {
         this.sendFailMessage(player, "§cWrong usage\n§fUsage:");
         player.sendMessage(usages);
-    }
-    public void sendTrapWarnMessage(Player player) {
-        this.sendFailMessage(player, "Anti Trap System Warning:");
-        String warnMessage = "§cLocation is not safe. Trying to teleport in a safe radius...";
-        this.sendRawMessage(player, warnMessage);
-    }
-    public void sendSafetpFailMessage(Player player, String type, String name) {
-        this.sendFailMessage(player, "Anti Trap System Warning:");
-        String warnMessage = "§fThere is no safe location nearby.\n" + "If you understand the risk and still want to teleport use:\n" + "/forcetp " + type + " " + name;
-        this.sendRawMessage(player, warnMessage);
-    }
-    public void sendMessageToSender(CommandSender sender, String message) {
-        sender.sendMessage(manager.getPrefix() + message);
-    }
-
-    public void warpDoesNotExist(Player player) {
-        this.sendFailMessage(player, "This warp does not exist.");
-    }
-    public void homeDoesNotExist(Player player) {
-        this.sendFailMessage(player, "This home does not exist.");
-    }
-
-    public void warpAlreadyExists(Player player) {
-        this.sendFailMessage(player, "This warp already exists.");
-    }
-    public void homeAlreadyExists(Player player) {
-        this.sendFailMessage(player, "This home already exists.");
     }
 }
