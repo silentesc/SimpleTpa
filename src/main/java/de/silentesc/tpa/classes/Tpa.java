@@ -98,9 +98,9 @@ public class Tpa {
 
         // Send messages
         Main.getInstance().getManager().getShortMessages().sendFailMessage(teleportingPlayer,
-                String.format("Your request to§e %s§7 has been§c expired", targetPlayer.getDisplayName()));
+                String.format("Your request to§e %s§c has been expired", targetPlayer.getDisplayName()));
         Main.getInstance().getManager().getShortMessages().sendFailMessage(targetPlayer,
-                String.format("§e%s§7's request has been§c expired", teleportingPlayer.getDisplayName()));
+                String.format("§e%s§c's request has been expired", teleportingPlayer.getDisplayName()));
     }
 
     // Getter
