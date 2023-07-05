@@ -50,6 +50,7 @@ public class Tpa {
 
         // Assign variables and check TpaMode
         final int preTeleportSeconds = Main.getInstance().getManager().getConfigUtils().getPreTeleportSeconds();
+        final int invincibilitySeconds = Main.getInstance().getManager().getConfigUtils().getInvincibilitySeconds();
 
         // Check if players are still online
         if (!teleportingPlayer.isOnline() || !targetPlayer.isOnline()) {
@@ -57,22 +58,28 @@ public class Tpa {
             return;
         }
 
+        // Wait until the preTeleportSeconds timer finished
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+            // Check if players are still online
+            if (!teleportingPlayer.isOnline() || !targetPlayer.isOnline())
+                return;
+
+            // Teleport player via LocationUtils to also play sound for all near players
+            Main.getInstance().getManager().getLocationUtils().teleportPlayer(teleportingPlayer, targetPlayer.getLocation());
+
+            // Make player temporarily invincible
+            Main.getInstance().getManager().getLists().getInvinciblePlayers().add(teleportingPlayer.getUniqueId());
+            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+                // Remove player from list
+                Main.getInstance().getManager().getLists().getInvinciblePlayers().remove(teleportingPlayer.getUniqueId());
+            }, invincibilitySeconds * 20L);
+        }, preTeleportSeconds * 20L);
+
         // Send messages
         Main.getInstance().getManager().getShortMessages().sendSuccessMessage(teleportingPlayer,
                 String.format("You will be teleported to§e %s§7 in§a %s§7 seconds", targetPlayer.getDisplayName(), preTeleportSeconds));
         Main.getInstance().getManager().getShortMessages().sendSuccessMessage(targetPlayer,
                 String.format("§e%s§7 will be teleported to you in§a %s§7 seconds", teleportingPlayer.getDisplayName(), preTeleportSeconds));
-
-        // Wait until the preTeleportSeconds timer finished
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            // Check if players are still online
-            if (!teleportingPlayer.isOnline() || !targetPlayer.isOnline()) {
-                getTpas().remove(this);
-                return;
-            }
-            // Teleport player via LocationUtils to also play sound for all near players
-            Main.getInstance().getManager().getLocationUtils().teleportPlayer(teleportingPlayer, targetPlayer.getLocation());
-        }, preTeleportSeconds * 20L);
     }
 
     // Called when the tpa expires
@@ -99,5 +106,11 @@ public class Tpa {
     // Getter
     public static List<Tpa> getTpas() {
         return Tpas;
+    }
+    public Player getTeleportingPlayer() {
+        return teleportingPlayer;
+    }
+    public Player getTargetPlayer() {
+        return targetPlayer;
     }
 }

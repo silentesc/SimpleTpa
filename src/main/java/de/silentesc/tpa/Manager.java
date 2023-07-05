@@ -2,11 +2,11 @@ package de.silentesc.tpa;
 
 import de.silentesc.tpa.commands.TpaCommand;
 import de.silentesc.tpa.commands.TpacceptCommand;
-import de.silentesc.tpa.utils.ConfigUtils;
-import de.silentesc.tpa.utils.JavaUtils;
-import de.silentesc.tpa.utils.LocationUtils;
-import de.silentesc.tpa.utils.ShortMessages;
+import de.silentesc.tpa.listeners.EntityDamageListener;
+import de.silentesc.tpa.listeners.PlayerQuitListener;
+import de.silentesc.tpa.utils.*;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
 
 import java.io.File;
 import java.util.Objects;
@@ -25,6 +25,7 @@ public class Manager {
     private ConfigUtils configUtils;
     private JavaUtils javaUtils;
     private LocationUtils locationUtils;
+    private Lists lists;
 
     public Manager() {
         loadConfig();
@@ -45,6 +46,7 @@ public class Manager {
         shortMessages = new ShortMessages();
         javaUtils = new JavaUtils();
         locationUtils = new LocationUtils();
+        lists = new Lists();
         configUtils = new ConfigUtils(); // Init FileConfig: config.yaml
     }
 
@@ -53,6 +55,10 @@ public class Manager {
         // Commands
         Objects.requireNonNull(Bukkit.getPluginCommand("tpa")).setExecutor(new TpaCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("tpaccept")).setExecutor(new TpacceptCommand());
+        // Listeners
+        PluginManager pluginManager = Bukkit.getPluginManager();
+        pluginManager.registerEvents(new EntityDamageListener(), Main.getInstance());
+        pluginManager.registerEvents(new PlayerQuitListener(), Main.getInstance());
     }
 
     // Getter
@@ -70,5 +76,8 @@ public class Manager {
     }
     public LocationUtils getLocationUtils() {
         return locationUtils;
+    }
+    public Lists getLists() {
+        return lists;
     }
 }
