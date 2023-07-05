@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class TpaCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+        // Manager
         Manager manager = Main.getInstance().getManager();
 
         // Return if sender is not a player

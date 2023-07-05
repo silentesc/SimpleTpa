@@ -1,6 +1,7 @@
 package de.silentesc.tpa;
 
 import de.silentesc.tpa.commands.TpaCommand;
+import de.silentesc.tpa.commands.TpacceptCommand;
 import de.silentesc.tpa.utils.ConfigUtils;
 import de.silentesc.tpa.utils.JavaUtils;
 import de.silentesc.tpa.utils.LocationUtils;
@@ -51,6 +52,7 @@ public class Manager {
     private void register() {
         // Commands
         Objects.requireNonNull(Bukkit.getPluginCommand("tpa")).setExecutor(new TpaCommand());
+        Objects.requireNonNull(Bukkit.getPluginCommand("tpaccept")).setExecutor(new TpacceptCommand());
     }
 
     // Getter
