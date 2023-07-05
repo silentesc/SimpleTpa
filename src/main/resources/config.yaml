@@ -1,0 +1,12 @@
+# The amount of time that passes before teleporting
+# Minimum value: 0
+# Maximum value: 10
+pre-teleport-seconds: 3
+# The amount of time a player is not able to die
+# Minimum value: 0
+# Maximum value: 10
+invincibility-seconds: 5
+# The amount of time the request is available
+# Minimum value: 10
+# Maximum value: 300 (5 min)
+keep-alive-seconds: 60
