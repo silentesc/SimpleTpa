@@ -20,7 +20,10 @@ public class Tpa {
         this.requestedPlayer = requestedPlayer;
         this.mode = mode;
 
+        // Add tpa to list
         getTPAS().add(this);
+
+        // Expire tpa after time is up
         Bukkit.getScheduler().runTaskLater(
                 Main.getInstance(), this::tpaExpired,
                 Main.getInstance().getManager().getConfigUtils().getKeepAliveSeconds()
@@ -61,14 +64,15 @@ public class Tpa {
         // Check if tpa still exists after the keep-alive time
         if (!getTPAS().contains(this)) return;
 
+        // "Delete" tpa
+        getTPAS().remove(this);
+
         // Send messages
         Main.getInstance().getManager().getShortMessages().sendFailMessage(requestingPlayer,
                 String.format("Your request to§e %s§7 has been§c expired", requestedPlayer));
         Main.getInstance().getManager().getShortMessages().sendFailMessage(requestedPlayer,
                 String.format("§e%s§7's request has been§c expired", requestingPlayer));
 
-        // "Delete" tpa
-        getTPAS().remove(this);
     }
 
     // Getter

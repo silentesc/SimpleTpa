@@ -1,11 +1,14 @@
 package de.silentesc.tpa;
 
+import de.silentesc.tpa.commands.TpaCommand;
 import de.silentesc.tpa.utils.ConfigUtils;
 import de.silentesc.tpa.utils.JavaUtils;
 import de.silentesc.tpa.utils.LocationUtils;
 import de.silentesc.tpa.utils.ShortMessages;
+import org.bukkit.Bukkit;
 
 import java.io.File;
+import java.util.Objects;
 
 public class Manager {
     /*
@@ -46,7 +49,8 @@ public class Manager {
 
     // Register Commands, TabCompleter and Listeners
     private void register() {
-
+        // Commands
+        Objects.requireNonNull(Bukkit.getPluginCommand("tpa")).setExecutor(new TpaCommand());
     }
 
     // Getter

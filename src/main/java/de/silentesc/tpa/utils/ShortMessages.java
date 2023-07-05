@@ -20,7 +20,10 @@ public class ShortMessages {
         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
     }
     public void wrongUsage(Player player, String[] usages) {
-        this.sendFailMessage(player, "§cWrong usage\n§fUsage:");
+        sendFailMessage(player, "§cWrong usage\n§fUsage:");
         player.sendMessage(usages);
+    }
+    public void playerDoesNotExist(Player player) {
+        sendFailMessage(player, "This player does not exist or is not currently online.");
     }
 }
