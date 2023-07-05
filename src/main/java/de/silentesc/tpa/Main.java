@@ -4,7 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
     private static Main instance;
-    private Manager instanceManager;
+    private Manager manager;
 
     public Main() {
         instance = this;
@@ -13,14 +13,14 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         // Constructor calls loadConfig(), initialize() and register()
-        instanceManager = new Manager();
+        manager = new Manager();
     }
 
     // Getter
     public static Main getInstance() {
         return instance;
     }
-    public Manager getInstanceManager() {
-        return instanceManager;
+    public Manager getManager() {
+        return manager;
     }
 }

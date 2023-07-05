@@ -23,7 +23,7 @@ public class Tpa {
         getTPAS().add(this);
         Bukkit.getScheduler().runTaskLater(
                 Main.getInstance(), this::tpaExpired,
-                Main.getInstance().getInstanceManager().getConfigUtils().getKeepAliveSeconds()
+                Main.getInstance().getManager().getConfigUtils().getKeepAliveSeconds()
         );
     }
 
@@ -33,14 +33,14 @@ public class Tpa {
         getTPAS().remove(this);
 
         // Assign variables and check TpMode
-        final int preTeleportSeconds = Main.getInstance().getInstanceManager().getConfigUtils().getPreTeleportSeconds();
+        final int preTeleportSeconds = Main.getInstance().getManager().getConfigUtils().getPreTeleportSeconds();
         final Player teleportingPlayer = (mode == TpaMode.TPA) ? requestingPlayer : requestedPlayer;
         final Player targetPlayer = (mode == TpaMode.TPA) ? requestedPlayer : requestingPlayer;
 
         // Send messages
-        Main.getInstance().getInstanceManager().getShortMessages().sendSuccessMessage(teleportingPlayer,
+        Main.getInstance().getManager().getShortMessages().sendSuccessMessage(teleportingPlayer,
                 String.format("You will be teleported to§e %s§7 in§a %s§7 seconds", targetPlayer.getDisplayName(), preTeleportSeconds));
-        Main.getInstance().getInstanceManager().getShortMessages().sendSuccessMessage(targetPlayer,
+        Main.getInstance().getManager().getShortMessages().sendSuccessMessage(targetPlayer,
                 String.format("§e%s§7 will be teleported to you in§a %s§7 seconds", teleportingPlayer.getDisplayName(), preTeleportSeconds));
 
         // Wait until the preTeleportSeconds timer finished
@@ -52,7 +52,7 @@ public class Tpa {
                 return;
             }
             // Teleport player via LocationUtils to also play sound for all near players
-            Main.getInstance().getInstanceManager().getLocationUtils().teleportPlayer(teleportingPlayer, targetPlayer.getLocation());
+            Main.getInstance().getManager().getLocationUtils().teleportPlayer(teleportingPlayer, targetPlayer.getLocation());
         }, preTeleportSeconds);
     }
 
@@ -62,9 +62,9 @@ public class Tpa {
         if (!getTPAS().contains(this)) return;
 
         // Send messages
-        Main.getInstance().getInstanceManager().getShortMessages().sendFailMessage(requestingPlayer,
+        Main.getInstance().getManager().getShortMessages().sendFailMessage(requestingPlayer,
                 String.format("Your request to§e %s§7 has been§c expired", requestedPlayer));
-        Main.getInstance().getInstanceManager().getShortMessages().sendFailMessage(requestedPlayer,
+        Main.getInstance().getManager().getShortMessages().sendFailMessage(requestedPlayer,
                 String.format("§e%s§7's request has been§c expired", requestingPlayer));
 
         // "Delete" tpa

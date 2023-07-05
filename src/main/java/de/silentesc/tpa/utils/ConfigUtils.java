@@ -12,7 +12,7 @@ public class ConfigUtils {
 
     public ConfigUtils() {
         config = new FileConfig("config.yaml");
-        javaUtils = Main.getInstance().getInstanceManager().getJavaUtils();
+        javaUtils = Main.getInstance().getManager().getJavaUtils();
     }
 
     public void reloadConfig() {

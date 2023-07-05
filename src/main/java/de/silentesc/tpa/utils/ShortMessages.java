@@ -7,9 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ShortMessages {
-    Manager instanceManager = Main.getInstance().getInstanceManager();
+    Manager manager = Main.getInstance().getManager();
     public void notAPlayer(CommandSender sender) {
-        sender.sendMessage(instanceManager.getPrefix() + "Only players can execute this command.");
+        sender.sendMessage(manager.getPrefix() + "Only players can execute this command.");
     }
     public void notPermitted(Player player) {
         this.sendFailMessage(player, "You are not permitted to do this.");
@@ -18,15 +18,15 @@ public class ShortMessages {
         this.sendMessageToSender(sender, "You are not permitted to do this.");
     }
     public void sendSuccessMessage(Player player, String message) {
-        player.sendMessage(instanceManager.getPrefix() + message);
+        player.sendMessage(manager.getPrefix() + message);
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
     }
     public void sendFailMessage(Player player, String message) {
-        player.sendMessage(instanceManager.getPrefix() + "§c" + message);
+        player.sendMessage(manager.getPrefix() + "§c" + message);
         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
     }
     public void sendMessageWithoutSound(Player player, String message) {
-        player.sendMessage(instanceManager.getPrefix() + message);
+        player.sendMessage(manager.getPrefix() + message);
     }
     public void sendRawMessage(Player player, String message) {
         player.sendMessage(message);
@@ -46,7 +46,7 @@ public class ShortMessages {
         this.sendRawMessage(player, warnMessage);
     }
     public void sendMessageToSender(CommandSender sender, String message) {
-        sender.sendMessage(instanceManager.getPrefix() + message);
+        sender.sendMessage(manager.getPrefix() + message);
     }
 
     public void warpDoesNotExist(Player player) {
