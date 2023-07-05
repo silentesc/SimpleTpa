@@ -1,5 +1,5 @@
 package de.silentesc.tpa.classes;
 
-public enum TpMode {
+public enum TpaMode {
     TPA, TPAHERE
 }

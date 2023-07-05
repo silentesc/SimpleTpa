@@ -12,10 +12,10 @@ public class Tpa {
 
     private final Player requestingPlayer;
     private final Player requestedPlayer;
-    private final TpMode mode;
+    private final TpaMode mode;
 
     // Called when a tpa has been started
-    public Tpa(Player requestingPlayer, Player requestedPlayer, TpMode mode) {
+    public Tpa(Player requestingPlayer, Player requestedPlayer, TpaMode mode) {
         this.requestingPlayer = requestingPlayer;
         this.requestedPlayer = requestedPlayer;
         this.mode = mode;
@@ -34,8 +34,8 @@ public class Tpa {
 
         // Assign variables and check TpMode
         final int preTeleportSeconds = Main.getInstance().getInstanceManager().getConfigUtils().getPreTeleportSeconds();
-        final Player teleportingPlayer = (mode == TpMode.TPA) ? requestingPlayer : requestedPlayer;
-        final Player targetPlayer = (mode == TpMode.TPA) ? requestedPlayer : requestingPlayer;
+        final Player teleportingPlayer = (mode == TpaMode.TPA) ? requestingPlayer : requestedPlayer;
+        final Player targetPlayer = (mode == TpaMode.TPA) ? requestedPlayer : requestingPlayer;
 
         // Send messages
         Main.getInstance().getInstanceManager().getShortMessages().sendSuccessMessage(teleportingPlayer,
