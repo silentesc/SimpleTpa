@@ -3,6 +3,7 @@ package de.silentesc.tpa.classes;
 import de.silentesc.tpa.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class Tpa {
         this.mode = mode;
 
         // Add tpa to list
-        getTPAS().add(this);
+        getTpas().add(this);
 
         // Expire tpa after time is up
         Bukkit.getScheduler().runTaskLater(
@@ -30,12 +31,29 @@ public class Tpa {
         );
     }
 
+    // Check if there is a tpa between 2 players
+    // Returns null if not exists
+    @Nullable
+    public static Tpa getTpa(final Player teleportingPlayer, final Player targetPlayer) {
+        // Loop through tpas
+        for (Tpa tpa : getTpas()) {
+            // Get players and check TpaMode
+            Player checkTeleportingPlayer = (tpa.mode == TpaMode.TPA) ? tpa.requestingPlayer : tpa.requestedPlayer;
+            Player checkTargetPlayer = (tpa.mode == TpaMode.TPA) ? tpa.requestedPlayer : tpa.requestingPlayer;
+            // Check if tpa exists
+            if (teleportingPlayer.getUniqueId() == checkTeleportingPlayer.getUniqueId() && targetPlayer.getUniqueId() == checkTargetPlayer.getUniqueId()) {
+                return tpa;
+            }
+        }
+        return null;
+    }
+
     // Called to teleport, teleporting ends a tpa
     public void performTeleport() {
         // This "deletes" the tpa
-        getTPAS().remove(this);
+        getTpas().remove(this);
 
-        // Assign variables and check TpMode
+        // Assign variables and check TpaMode
         final int preTeleportSeconds = Main.getInstance().getManager().getConfigUtils().getPreTeleportSeconds();
         final Player teleportingPlayer = (mode == TpaMode.TPA) ? requestingPlayer : requestedPlayer;
         final Player targetPlayer = (mode == TpaMode.TPA) ? requestedPlayer : requestingPlayer;
@@ -51,7 +69,7 @@ public class Tpa {
             // Check if players are still online
             if (!teleportingPlayer.isOnline() || !targetPlayer.isOnline()) {
                 System.out.println("At least 1 player is offline");
-                getTPAS().remove(this);
+                getTpas().remove(this);
                 return;
             }
             // Teleport player via LocationUtils to also play sound for all near players
@@ -62,10 +80,10 @@ public class Tpa {
     // Called when the tpa expires
     private void tpaExpired() {
         // Check if tpa still exists after the keep-alive time
-        if (!getTPAS().contains(this)) return;
+        if (!getTpas().contains(this)) return;
 
         // "Delete" tpa
-        getTPAS().remove(this);
+        getTpas().remove(this);
 
         // Send messages
         Main.getInstance().getManager().getShortMessages().sendFailMessage(requestingPlayer,
@@ -76,7 +94,7 @@ public class Tpa {
     }
 
     // Getter
-    public static List<Tpa> getTPAS() {
+    public static List<Tpa> getTpas() {
         return Tpas;
     }
 }
