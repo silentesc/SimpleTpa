@@ -54,7 +54,7 @@ public class TpaCommand implements CommandExecutor {
         manager.getShortMessages().sendSuccessMessage(player, String.format("A tpa request has been sent to§e %s", target.getDisplayName()));
         manager.getShortMessages().sendSuccessMessage(target, String.format("You have received a tpa request from§e %s", player.getDisplayName()));
 
-        // Send clickable messages
+        // Create clickable messages
         ComponentBuilder tpacceptMessage = new ComponentBuilder("Accept")
                 .color(ChatColor.GREEN)
                 .bold(true)
@@ -63,8 +63,14 @@ public class TpaCommand implements CommandExecutor {
                 .color(ChatColor.RED)
                 .bold(true)
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, String.format("/tpdeny %s", player.getDisplayName())));
-        target.spigot().sendMessage(tpacceptMessage.create());
-        target.spigot().sendMessage(tpdenyMessage.create());
+        // Combine
+        ComponentBuilder combinedMessage = new ComponentBuilder()
+                .append(tpacceptMessage.create())
+                .append(" - ", ComponentBuilder.FormatRetention.NONE)
+                .append(tpdenyMessage.create());
+
+        // Send message
+        target.spigot().sendMessage(combinedMessage.create());
 
         return true;
     }
