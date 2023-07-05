@@ -2,6 +2,7 @@ package de.silentesc.tpa;
 
 import de.silentesc.tpa.utils.ConfigUtils;
 import de.silentesc.tpa.utils.JavaUtils;
+import de.silentesc.tpa.utils.LocationUtils;
 import de.silentesc.tpa.utils.ShortMessages;
 
 import java.io.File;
@@ -19,6 +20,7 @@ public class Manager {
     private ShortMessages shortMessages;
     private ConfigUtils configUtils;
     private JavaUtils javaUtils;
+    private LocationUtils locationUtils;
 
     public Manager() {
         loadConfig();
@@ -39,6 +41,7 @@ public class Manager {
         shortMessages = new ShortMessages();
         configUtils = new ConfigUtils(); // Init FileConfig: config.yaml
         javaUtils = new JavaUtils();
+        locationUtils = new LocationUtils();
     }
 
     // Register Commands, TabCompleter and Listeners
@@ -58,5 +61,8 @@ public class Manager {
     }
     public JavaUtils getJavaUtils() {
         return javaUtils;
+    }
+    public LocationUtils getLocationUtils() {
+        return locationUtils;
     }
 }
