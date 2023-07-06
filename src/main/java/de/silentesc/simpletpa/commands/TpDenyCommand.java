@@ -49,8 +49,8 @@ public class TpDenyCommand implements CommandExecutor {
         Tpa.getTpas().remove(tpa);
 
         // Send messages
-        manager.getShortMessages().sendSuccessMessage(player, String.format("You have§c declined§e %s§7's tpa request.", target.getDisplayName()));
-        manager.getShortMessages().sendSuccessMessage(target, String.format("§e%s§c declined§7 your tpa request.", target.getDisplayName()));
+        manager.getShortMessages().sendSuccessMessage(player, String.format("You have§c declined§e %s§7's tpa request", target.getDisplayName()));
+        manager.getShortMessages().sendSuccessMessage(target, String.format("§e%s§c declined§7 your tpa request", target.getDisplayName()));
 
         return true;
     }

@@ -19,7 +19,7 @@ public class ReloadConfigCommand implements CommandExecutor {
         Main.getInstance().getManager().getConfigUtils().reloadConfig();
 
         // Send message
-        Main.getInstance().getManager().getShortMessages().sendMessageToSender(commandSender, "Config has been reloaded.");
+        Main.getInstance().getManager().getShortMessages().sendMessageToSender(commandSender, "Config has been reloaded");
 
         return true;
     }

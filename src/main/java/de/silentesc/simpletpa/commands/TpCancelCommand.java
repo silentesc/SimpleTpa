@@ -49,7 +49,8 @@ public class TpCancelCommand implements CommandExecutor {
         Tpa.getTpas().remove(tpa);
 
         // Send message
-        manager.getShortMessages().sendSuccessMessage(player, "Your pending tpa has been canceled.");
+        manager.getShortMessages().sendSuccessMessage(player, String.format("You§c canceled§7 your pending tpa to§e%s", target.getDisplayName()));
+        manager.getShortMessages().sendSuccessMessage(target, String.format("§e%s§c canceled§7 their pending tpa", player.getDisplayName()));
 
         return true;
     }

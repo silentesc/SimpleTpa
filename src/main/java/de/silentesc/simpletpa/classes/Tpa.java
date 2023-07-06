@@ -59,10 +59,15 @@ public class Tpa {
         }
 
         // Send messages
-        Main.getInstance().getManager().getShortMessages().sendSuccessMessage(teleportingPlayer,
-                String.format("You will be teleported to§e %s§7 in§a %s§7 seconds", targetPlayer.getDisplayName(), preTeleportSeconds));
-        Main.getInstance().getManager().getShortMessages().sendSuccessMessage(targetPlayer,
-                String.format("§e%s§7 will be teleported to you in§a %s§7 seconds", teleportingPlayer.getDisplayName(), preTeleportSeconds));
+        Main.getInstance().getManager().getShortMessages().sendSuccessMessage(
+                teleportingPlayer,
+                String.format("§e%s§a accepted§7 your tpa request\n" +
+                        "You will be teleported in§a %s§7 seconds", targetPlayer.getDisplayName(), preTeleportSeconds)
+        );
+        Main.getInstance().getManager().getShortMessages().sendSuccessMessage(
+                targetPlayer,
+                String.format("§e%s§7 will be teleported to you in§a %s§7 seconds", teleportingPlayer.getDisplayName(), preTeleportSeconds)
+        );
 
         // Wait until the preTeleportSeconds timer finished
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {

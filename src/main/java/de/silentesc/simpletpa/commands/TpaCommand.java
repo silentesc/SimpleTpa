@@ -43,15 +43,15 @@ public class TpaCommand implements CommandExecutor {
 
         // Check if target is player
         if (player.getUniqueId() == target.getUniqueId()) {
-            manager.getShortMessages().sendFailMessage(player, "You can't send a request to yourself.");
+            manager.getShortMessages().sendFailMessage(player, "You can't send a request to yourself");
             return true;
         }
 
         // Check if player has already pending tpa
         for (Tpa tpa : Tpa.getTpas()) {
             if (tpa.getTeleportingPlayer().getUniqueId() == player.getUniqueId()) {
-                manager.getShortMessages().sendFailMessage(player, "You already have a pending request.\n" +
-                        "Use /tpcancel [player] to cancel the current request.");
+                manager.getShortMessages().sendFailMessage(player, "You already have a pending request\n" +
+                        "Use /tpcancel [player] to cancel the current request");
                 return true;
             }
         }
