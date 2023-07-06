@@ -9,6 +9,9 @@ public class ShortMessages {
     public void notAPlayer(CommandSender sender) {
         sender.sendMessage(Main.getInstance().getManager().getPrefix() + "Only players can execute this command.");
     }
+    public void notPermitted(CommandSender sender) {
+        sendMessageToSender(sender, "You are not permitted to do this.");
+    }
     public void sendSuccessMessage(Player player, String message) {
         player.sendMessage(Main.getInstance().getManager().getPrefix() + message);
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
@@ -23,5 +26,8 @@ public class ShortMessages {
     }
     public void playerDoesNotExist(Player player) {
         sendFailMessage(player, "This player does not exist or is not currently online.");
+    }
+    public void sendMessageToSender(CommandSender sender, String message) {
+        sender.sendMessage(Main.getInstance().getManager().getPrefix() + message);
     }
 }

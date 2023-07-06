@@ -6,9 +6,17 @@ authors: [silentesc]
 description: 1.20.1 Spigot Plugin for teleport requests with other players
 
 commands:
+  simpletpa_reloadcfg:
+    description: Reloads the config
+    usage: /simpletpa_reloadcfg
   tpa:
     usage: /tpa [player]
     description: Teleport request to teleport to the player
   tpaccept:
     usage: /tpaccept [player]
     description: Accept pending teleport accept
+
+permissions:
+  simpletpa.reload:
+    description: Permission to use /simpletpa_reloadcfg
+    default: op

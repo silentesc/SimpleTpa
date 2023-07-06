@@ -1,5 +1,6 @@
 package de.silentesc.simpletpa;
 
+import de.silentesc.simpletpa.commands.ReloadConfigCommand;
 import de.silentesc.simpletpa.commands.TpaCommand;
 import de.silentesc.simpletpa.commands.TpacceptCommand;
 import de.silentesc.simpletpa.listeners.EntityDamageListener;
@@ -53,6 +54,7 @@ public class Manager {
     // Register Commands, TabCompleter and Listeners
     private void register() {
         // Commands
+        Objects.requireNonNull(Bukkit.getPluginCommand("simpletpa_reloadcfg")).setExecutor(new ReloadConfigCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("tpa")).setExecutor(new TpaCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("tpaccept")).setExecutor(new TpacceptCommand());
         // Listeners
