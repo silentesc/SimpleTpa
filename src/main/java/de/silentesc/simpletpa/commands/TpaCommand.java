@@ -47,6 +47,14 @@ public class TpaCommand implements CommandExecutor {
             return true;
         }
 
+        // Check if player has already pending tpa
+        for (Tpa tpa : Tpa.getTpas()) {
+            if (tpa.getTeleportingPlayer().getUniqueId() == player.getUniqueId()) {
+                manager.getShortMessages().sendFailMessage(player, "You already have a pending request. Use /tpcancel [player] to cancel the current request.");
+                return true;
+            }
+        }
+
         // Create tpa
         new Tpa(player, target);
 
