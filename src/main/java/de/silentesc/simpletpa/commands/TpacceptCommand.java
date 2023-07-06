@@ -46,7 +46,7 @@ public class TpacceptCommand implements CommandExecutor {
         }
 
         // Perform teleport
-        tpa.performTeleport();
+        tpa.performTeleportAfterPreTeleportCooldown();
 
         return true;
     }

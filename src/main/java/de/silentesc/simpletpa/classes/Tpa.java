@@ -44,7 +44,7 @@ public class Tpa {
     }
 
     // Called to teleport, teleporting ends a tpa
-    public void performTeleport() {
+    public void performTeleportAfterPreTeleportCooldown() {
         // This "deletes" the tpa
         getTpas().remove(this);
 
