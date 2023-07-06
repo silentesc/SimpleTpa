@@ -30,4 +30,7 @@ public class ShortMessages {
     public void sendMessageToSender(CommandSender sender, String message) {
         sender.sendMessage(Main.getInstance().getManager().getPrefix() + message);
     }
+    public void tpaDoesNotExist(Player player) {
+        sendFailMessage(player, "This tpa doesn't exist or is expired.");
+    }
 }

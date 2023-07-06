@@ -15,6 +15,9 @@ commands:
   tpaccept:
     usage: /tpaccept [player]
     description: Accept pending teleport accept
+  tpcancel:
+    usage: /tpcancel [player]
+    description: Cancels a pending teleport
 
 permissions:
   simpletpa.reload:

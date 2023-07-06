@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class TpacceptCommand implements CommandExecutor {
+public class TpCancelCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         // Manager
@@ -23,7 +23,7 @@ public class TpacceptCommand implements CommandExecutor {
         }
 
         Player player = (Player) commandSender;
-        String[] usages = {"/tpaccept [player]"};
+        String[] usages = {"/tpcancel [player]"};
 
         // Return if args length is not 1
         if (strings.length != 1) {
@@ -45,8 +45,11 @@ public class TpacceptCommand implements CommandExecutor {
             return true;
         }
 
-        // Perform teleport
-        tpa.performTeleportAfterPreTeleportCooldown();
+        // Remove tpa
+        Tpa.getTpas().remove(tpa);
+
+        // Send message
+        manager.getShortMessages().sendSuccessMessage(player, "Your pending tpa has been canceled.");
 
         return true;
     }
