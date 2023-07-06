@@ -58,6 +58,12 @@ public class Tpa {
             return;
         }
 
+        // Send messages
+        Main.getInstance().getManager().getShortMessages().sendSuccessMessage(teleportingPlayer,
+                String.format("You will be teleported to§e %s§7 in§a %s§7 seconds", targetPlayer.getDisplayName(), preTeleportSeconds));
+        Main.getInstance().getManager().getShortMessages().sendSuccessMessage(targetPlayer,
+                String.format("§e%s§7 will be teleported to you in§a %s§7 seconds", teleportingPlayer.getDisplayName(), preTeleportSeconds));
+
         // Wait until the preTeleportSeconds timer finished
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             // Check if players are still online
@@ -67,6 +73,12 @@ public class Tpa {
             // Teleport player via LocationUtils to also play sound for all near players
             Main.getInstance().getManager().getLocationUtils().teleportPlayer(teleportingPlayer, targetPlayer.getLocation());
 
+            // Send messages
+            Main.getInstance().getManager().getShortMessages().sendSuccessMessage(teleportingPlayer,
+                    String.format("You have been teleported to§e %s", targetPlayer.getDisplayName()));
+            Main.getInstance().getManager().getShortMessages().sendSuccessMessage(targetPlayer,
+                    String.format("§e%s§7 has been teleported to you", teleportingPlayer.getDisplayName()));
+
             // Make player temporarily invincible
             Main.getInstance().getManager().getLists().getInvinciblePlayers().add(teleportingPlayer.getUniqueId());
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
@@ -74,12 +86,6 @@ public class Tpa {
                 Main.getInstance().getManager().getLists().getInvinciblePlayers().remove(teleportingPlayer.getUniqueId());
             }, invincibilitySeconds * 20L);
         }, preTeleportSeconds * 20L);
-
-        // Send messages
-        Main.getInstance().getManager().getShortMessages().sendSuccessMessage(teleportingPlayer,
-                String.format("You will be teleported to§e %s§7 in§a %s§7 seconds", targetPlayer.getDisplayName(), preTeleportSeconds));
-        Main.getInstance().getManager().getShortMessages().sendSuccessMessage(targetPlayer,
-                String.format("§e%s§7 will be teleported to you in§a %s§7 seconds", teleportingPlayer.getDisplayName(), preTeleportSeconds));
     }
 
     // Called when the tpa expires
