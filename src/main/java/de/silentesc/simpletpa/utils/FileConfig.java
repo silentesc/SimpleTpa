@@ -1,6 +1,6 @@
-package de.silentesc.tpa.utils;
+package de.silentesc.simpletpa.utils;
 
-import de.silentesc.tpa.Main;
+import de.silentesc.simpletpa.Main;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 

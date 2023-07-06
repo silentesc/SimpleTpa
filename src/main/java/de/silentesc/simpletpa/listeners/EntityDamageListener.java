@@ -1,6 +1,6 @@
-package de.silentesc.tpa.listeners;
+package de.silentesc.simpletpa.listeners;
 
-import de.silentesc.tpa.Main;
+import de.silentesc.simpletpa.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

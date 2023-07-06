@@ -1,4 +1,4 @@
-package de.silentesc.tpa.utils;
+package de.silentesc.simpletpa.utils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
-package de.silentesc.tpa.commands;
+package de.silentesc.simpletpa.commands;
 
-import de.silentesc.tpa.Main;
-import de.silentesc.tpa.Manager;
-import de.silentesc.tpa.classes.Tpa;
+import de.silentesc.simpletpa.Main;
+import de.silentesc.simpletpa.Manager;
+import de.silentesc.simpletpa.classes.Tpa;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -1,6 +1,6 @@
-package de.silentesc.tpa.classes;
+package de.silentesc.simpletpa.classes;
 
-import de.silentesc.tpa.Main;
+import de.silentesc.simpletpa.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;

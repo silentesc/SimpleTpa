@@ -1,4 +1,4 @@
-package de.silentesc.tpa.utils;
+package de.silentesc.simpletpa.utils;
 
 public class JavaUtils {
     /*

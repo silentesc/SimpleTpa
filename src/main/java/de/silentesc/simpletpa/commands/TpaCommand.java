@@ -1,8 +1,8 @@
-package de.silentesc.tpa.commands;
+package de.silentesc.simpletpa.commands;
 
-import de.silentesc.tpa.Main;
-import de.silentesc.tpa.Manager;
-import de.silentesc.tpa.classes.Tpa;
+import de.silentesc.simpletpa.Main;
+import de.silentesc.simpletpa.Manager;
+import de.silentesc.simpletpa.classes.Tpa;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;

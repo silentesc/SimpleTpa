@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.silentesc</groupId>
-    <artifactId>TPA</artifactId>
+    <artifactId>SimpleTpa</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>TPA</name>
+    <name>SimpleTpa</name>
 
     <description>1.20.1 Spigot Plugin for teleport requests with other players</description>
     <properties>

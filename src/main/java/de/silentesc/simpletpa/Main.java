@@ -1,4 +1,4 @@
-package de.silentesc.tpa;
+package de.silentesc.simpletpa;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

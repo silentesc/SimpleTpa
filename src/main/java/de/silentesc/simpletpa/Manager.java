@@ -1,10 +1,10 @@
-package de.silentesc.tpa;
+package de.silentesc.simpletpa;
 
-import de.silentesc.tpa.commands.TpaCommand;
-import de.silentesc.tpa.commands.TpacceptCommand;
-import de.silentesc.tpa.listeners.EntityDamageListener;
-import de.silentesc.tpa.listeners.PlayerQuitListener;
-import de.silentesc.tpa.utils.*;
+import de.silentesc.simpletpa.commands.TpaCommand;
+import de.silentesc.simpletpa.commands.TpacceptCommand;
+import de.silentesc.simpletpa.listeners.EntityDamageListener;
+import de.silentesc.simpletpa.listeners.PlayerQuitListener;
+import de.silentesc.simpletpa.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 

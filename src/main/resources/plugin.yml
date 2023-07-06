@@ -1,6 +1,6 @@
-name: TPA
+name: SimpleTpa
 version: '${project.version}'
-main: de.silentesc.tpa.Main
+main: de.silentesc.simpletpa.Main
 api-version: '1.20'
 authors: [silentesc]
 description: 1.20.1 Spigot Plugin for teleport requests with other players
