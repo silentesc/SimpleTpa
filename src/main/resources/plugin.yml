@@ -18,6 +18,9 @@ commands:
   tpcancel:
     usage: /tpcancel [player]
     description: Cancels a pending teleport
+  tpdeny:
+    usage: /tpdeny [player]
+    description: Denys a teleport request
 
 permissions:
   simpletpa.reload:
