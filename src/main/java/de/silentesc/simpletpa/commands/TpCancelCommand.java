@@ -39,7 +39,7 @@ public class TpCancelCommand implements CommandExecutor {
         }
 
         // Check if tpa exists
-        Tpa tpa = Tpa.getTpa(target, player);
+        Tpa tpa = Tpa.getTpa(player, target);
         if (tpa == null) {
             manager.getShortMessages().tpaDoesNotExist(player);
             return true;
